@@ -205,6 +205,7 @@ class ConvBackbone(Backbone):
 
     def forward(self, batch, t):
         """Forward pass of the ConvBackbone."""
+        #print(batch.shape)
         if self.interpolate:
             upsampled = self.interp.to_target(batch)
         else:
