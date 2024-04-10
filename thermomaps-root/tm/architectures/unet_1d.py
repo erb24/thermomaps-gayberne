@@ -298,7 +298,7 @@ class Unet1D(nn.Module):
         self.init_conv = nn.Conv1d(input_channels, init_dim, 7, padding=3)
 
         dims = [init_dim, *map(lambda m: dim * m, dim_mults)]
-        print(dims)
+        #print(dims)
         in_out = list(zip(dims[:-1], dims[1:]))
 
         block_klass = partial(ResnetBlock, groups=resnet_block_groups)
