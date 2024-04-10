@@ -56,7 +56,7 @@ class GlobalEquilibriumHarmonicPrior(UnitNormalPrior):
             temperatures = temperatures.unsqueeze(-1).unsqueeze(-1).expand(*coord_shape)
             coord_variances = temperatures # expand along batch and coordinate dims
         else:
-            coord_variances = temperatures.unsqueeze(-1).unsqueeze(-1).expand(*coord_shape) # expand along batch and coordinate dims
+            coord_variances = temperatures.unsqueeze(-1).expand(*coord_shape) # expand along batch and coordinate dims
         fluct_variances = torch.full((fluct_shape), 1)
 
         variances = torch.cat((coord_variances, fluct_variances), dim=1)
