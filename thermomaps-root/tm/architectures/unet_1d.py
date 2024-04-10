@@ -298,6 +298,7 @@ class Unet1D(nn.Module):
         self.init_conv = nn.Conv1d(input_channels, init_dim, 7, padding=3)
 
         dims = [init_dim, *map(lambda m: dim * m, dim_mults)]
+        print(dims)
         in_out = list(zip(dims[:-1], dims[1:]))
 
         block_klass = partial(ResnetBlock, groups=resnet_block_groups)
@@ -381,6 +382,7 @@ class Unet1D(nn.Module):
             x = torch.cat((x_self_cond, x), dim=1)
 
         x = self.init_conv(x)
+        #print(x.shape)
         r = x.clone()
 
         t = self.time_mlp(time)
@@ -397,9 +399,13 @@ class Unet1D(nn.Module):
 
             x = downsample(x)
 
+        #print(x.shape)
         x = self.mid_block1(x, t)
+        #print(x.shape)
         x = self.mid_attn(x)
+        #print(x.shape)
         x = self.mid_block2(x, t)
+        #print(x.shape)
 
         for block1, block2, attn, upsample in self.ups:
             x = torch.cat((x, h.pop()), dim=1)
