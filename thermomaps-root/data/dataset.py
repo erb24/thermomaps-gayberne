@@ -102,7 +102,7 @@ class MultiEnsembleDataset:
         for trajectory in self.trajectories:
             state_var_chs = []
             state_var_vector = []
-            if len(trajectory.coordinates.shape) == 3: # No channel dim
+            if len(trajectory.coordinates.shape) == 2: # No channel dim
                 coord_ch = np.expand_dims(trajectory.coordinates, 1)
             else:
                 coord_ch = trajectory.coordinates
