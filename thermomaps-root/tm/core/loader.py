@@ -33,6 +33,7 @@ class NormalTransform(Transform):
             data (torch.Tensor): Input data.
         """
         super().__init__(data)
+        # mean and standard deviation over the trajectory
         self.mean = data.mean(0)
         self.std = data.std(0)
 
@@ -46,11 +47,11 @@ class NormalTransform(Transform):
         Returns:
             torch.Tensor: Standardized data.
         """
-        try:
+        if len(x.shape) == 4:
             (_, nc, _, _) = x.shape
             return (x - self.mean[:nc, :, :]) / (self.std[:nc, :, :])
-        except:
-            return (x - self.mean[-1, :, :]) / (self.std[-1, :, :])
+        else:
+            return (x - self.mean) / (self.std)
 
     def reverse(self, x):
         """
@@ -62,11 +63,11 @@ class NormalTransform(Transform):
         Returns:
             torch.Tensor: Original-scale data.
         """
-        try:
+        if len(x.shape) == 4:
             (_, nc, _, _) = x.shape
             return x * (self.std[:nc, :, :]) + self.mean[:nc, :, :]
-        except:
-            return x * (self.std[-1, :, :]) + self.mean[-1, :, :]
+        else:
+            return x * (self.std) + self.mean
 
 
 class MinMaxTransform(Transform):
