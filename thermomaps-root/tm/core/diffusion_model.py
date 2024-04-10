@@ -301,6 +301,7 @@ class DiffusionTrainer(DiffusionModel):
             Tuple: (noise, noise_pred)
         """
         b_t, noise = self.noise_batch(b, t, prior, **kwargs)
+        #print(b_t.shape, noise.shape)
         b_0, noise_pred = self.denoise_batch(b_t, t)
         if self.pred_type == "noise":
             return noise, noise_pred
