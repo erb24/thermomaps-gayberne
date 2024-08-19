@@ -40,7 +40,7 @@ pair_modify	shift yes
 neighbor	0.8 bin
 neigh_modify	delay 0 every 1 check yes
 
-fix             1 ell nvt/asphere temp 4.0 1.0 $(100.0*dt)
+fix             1 ell nvt/asphere temp ITEMP FTEMP $(100.0*dt)
 
 # this dump format should be readable by OVITO
 dump 2 all custom 100 test.ellipsoid.dump id type x y z &
@@ -58,7 +58,7 @@ unfix           1
 undump		2
 undump		3
 
-fix             1 ell nvt/asphere temp 1.0 1.0 $(100.0*dt)
+fix             1 ell nvt/asphere temp FTEMP FTEMP $(100.0*dt)
 
 # this dump format should be readable by OVITO
 dump 2 all custom 100 pro.ellipsoid.dump id type x y z &
