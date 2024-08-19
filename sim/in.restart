@@ -1,0 +1,76 @@
+# first attempt at ellipsoidal WCA simulations
+variable 	dt index 0.0015
+#variable	b index 0.5 # radius of short axis
+#variable	NFRS index 100000
+units		lj
+timestep	0.0015
+atom_style	ellipsoid
+#atom_modify	first big
+dimension	3
+boundary	p p p
+# create big ellipsoidal particles
+
+#lattice		sc 0.01 #0.14 #density in reduced LJ units
+#region		box block 0 7.0 0 7.0 0 7.0
+#create_box	1 box
+#create_atoms	1 region box
+#
+#read_restart restart.equil.npt
+read_restart restart.900000
+
+
+set             type 1 mass 1.0
+set             type 1 shape 3.0 1.0 1.0
+group           ell type 1
+#set             group ell quat/random 29898
+
+compute         rot ell temp/asphere
+compute q all property/atom quatw quati quatj quatk
+compute diameter all property/atom shapex shapey shapez
+
+velocity	ell create 1.77 87287 loop geom
+
+# equilibrate big particles
+
+pair_style      gayberne 1.0 1.0 2.0 4.0
+pair_coeff      1 1 1.0 1.0 1 1 0.2 1 1 0.2
+pair_modify	shift yes
+#pair_coeff      1 2 1.0 1.0 1 1 1 1 1 1 0.0
+#pair_coeff      2 2 1.0 1.0 1 1 1 1 1 1 0.0
+
+neighbor	0.8 bin
+neigh_modify	delay 0 every 1 check yes
+
+#fix             1 ell nvt/asphere temp 4.0 1.0 $(100.0*dt)
+
+# this dump format should be readable by OVITO
+#dump 2 all custom 100 test.ellipsoid.dump id type x y z &
+#                                      c_q[1] c_q[2] c_q[3] c_q[4] &
+#                                      c_diameter[1] c_diameter[2] c_diameter[3]
+
+
+#dump 3 all custom 100000 quaternions.dump id type c_q[1] c_q[2] c_q[3] c_q[4]
+
+#thermo_style    custom step temp c_rot epair etotal enthalpy press vol density
+#thermo          100
+
+#run             100000
+#write_restart restart.annealed
+
+#unfix           1
+#undump		2
+#undump		3
+
+fix             1 ell nvt/asphere temp 1.77 1.77 $(100.0*dt)
+#fix 		2 ell plumed plumedfile plumed.dat outfile p.log
+# this dump format should be readable by OVITO
+dump 2 all custom 100 2.pro.ellipsoid.dump id type x y z &
+                                      c_q[1] c_q[2] c_q[3] c_q[4] &
+                                      c_diameter[1] c_diameter[2] c_diameter[3]
+
+
+thermo_style    custom step temp c_rot epair etotal enthalpy press vol density
+thermo          100
+restart         100000 restart.*
+run             100000000
+
