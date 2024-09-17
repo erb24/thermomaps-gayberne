@@ -9,7 +9,8 @@ import sys
 
 
 PATH = sys.argv[1]; print(PATH)
-
+FILE = sys.argv[2]; print(FILE)
+print(PATH + FILE)
 
 
 traj = []
@@ -17,7 +18,7 @@ quats = []
 N = 343
 NF = 12
 counter = 0
-with open(PATH + 'pro.ellipsoid.dump', "r") as f:
+with open(PATH + FILE, "r") as f:
     for line in tqdm(f):
         tmp = line.split()
         if (len(tmp) == NF):

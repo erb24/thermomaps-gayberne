@@ -10,6 +10,6 @@ module load lammps/20210310
 module list
 
 #lmp < in.equil
-#lmp < in.ellipsoid | tee tee.log
-lmp < in.restart | tee -a tee.log
+lmp < in.ellipsoid | tee tee.log
+
 date
