@@ -53,7 +53,7 @@ class GlobalEquilibriumHarmonicPrior(UnitNormalPrior):
         temps_for_each_sample_in_batch_bool = temperatures.shape[0] == batch_size
 
         if not temps_for_each_channel_bool and temps_for_each_sample_in_batch_bool:
-            temperatures = temperatures.unsqueeze(-1).unsqueeze(-1).expand(*coord_shape)
+            temperatures = temperatures.unsqueeze(-1).expand(*coord_shape)
             coord_variances = temperatures # expand along batch and coordinate dims
         else:
             coord_variances = temperatures.unsqueeze(-1).expand(*coord_shape) # expand along batch and coordinate dims
