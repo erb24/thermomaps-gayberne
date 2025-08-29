@@ -3,7 +3,7 @@ This repo showcases the ability of Thermodynamic Maps to learn the isotropic-nem
 > Herron *et al.*, "Inferring phase transitions and critical exponents from limited observations with Thermodynamic Maps," 	*PNAS*, **121**, 52, 2024 (https://doi.org/10.1073/pnas.2321971121)
 
 The publication corresponding to this repository has been published in *Phys. Rev. Lett.*:
-> Beyerle and Tiwary, "Inferring the Isotropic-nematic Phase Transition with Generative Machine Learning,"  *Phys. Rev. Lett*, **135**, 068102 (https://journals.aps.org/prl/accepted/10.1103/1wdj-ym3s)
+> Beyerle and Tiwary, "Inferring the Isotropic-nematic Phase Transition with Generative Machine Learning,"  *Phys. Rev. Lett*, **135**, 068102 , 2025 (https://journals.aps.org/prl/accepted/10.1103/1wdj-ym3s)
 
 To install with GPU support for calculations, remove `torch' from the requirements.txt file, then use the following to install torch with CUDA:
 
