@@ -23,3 +23,5 @@ micromamba install matplotlib -c conda-forge
 ```
 
 Installation performed May 2024
+
+To actually train and evaluate the peroformance of the model, please use the thermomaps_gb.py file in the "analysis" directory. There is a notebook provided in the base directory of the repository, but this notebook is deprecated and not supported. All the scripts and notebooks required to reproduce the results in the *PRL* paper should be present in the `analysis` directory.
