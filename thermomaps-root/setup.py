@@ -6,9 +6,9 @@ setup(
     version="0.1",
     packages=find_packages(),
     install_requires=[],
-    author="Lukas",
-    author_email="lherron@umd.edu",
-    description="A Python module to study molecular dynamics simulations using Thermodynamic Maps",
+    author="Eric (but really Lukas Herron)",
+    author_email="eric.beyerle@bio.ku.dk",
+    description="A Python module to study the isotropic-nematic phase transition in Gay-Berne melts using Thermodynamic Maps",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
